@@ -33,7 +33,7 @@ public class LoadAutomateAction extends Action {
 
         // Valeur par défaut pour les tests en local
         if (StringUtils.isBlank(path)) {
-            path = "C:\\Users\\Sim\\Desktop\\automate.txt";
+            path = "C:\\Users\\simbo\\OneDrive\\Desktop\\automate.txt";
         }
 
         File file = new File(path);
@@ -58,14 +58,15 @@ public class LoadAutomateAction extends Action {
         try {
             List<String> instructions = Files.readAllLines(file.toPath());
             for (String instruction : instructions) {
-                // TODO: INSTRUCTION TYPE ERROR HANDLING -------------------------------------------
                 String[] args = instruction.split(" ");
-                String[] insArgs = new String[0];
+
+                String[] insArgs;
                 if (args.length > 1) {
-                    insArgs = Arrays.copyOfRange(args, 1, args.length - 1);
+                    insArgs = Arrays.copyOfRange(args, 1, args.length);
                 } else {
-                    // TODO: DISPLAY ERROR IF NO INSTRUCTION ARG ? ----------------------
+                    throw new IllegalArgumentException("Veuillez spécifier des arguments à l'instruction entrée");
                 }
+
                 this.handleInstruction(args[0].trim().toUpperCase(), insArgs);
             }
         } catch (IOException e) {

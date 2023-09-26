@@ -53,4 +53,5 @@ public class Automaton {
     public boolean isAutomatonDefined() {
         return this.initialState != null;
     }
+
 }

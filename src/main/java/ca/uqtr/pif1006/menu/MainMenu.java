@@ -1,5 +1,6 @@
 package ca.uqtr.pif1006.menu;
 
+import ca.uqtr.pif1006.action.DisplayAutomatonAction;
 import ca.uqtr.pif1006.action.LoadAutomateAction;
 import ca.uqtr.pif1006.action.ValidateAutomatonInputAction;
 import ca.uqtr.pif1006.exception.InvalidOptionError;
@@ -31,7 +32,7 @@ public class MainMenu extends Menu {
                     new LoadAutomateAction(this).execute();
                     break;
                 case 2:
-                    System.out.println("afficher");
+                    new DisplayAutomatonAction(this).execute();
                     break;
                 case 3:
                     new ValidateAutomatonInputAction(this).execute();

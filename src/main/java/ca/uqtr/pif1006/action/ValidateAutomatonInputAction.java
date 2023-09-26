@@ -19,13 +19,8 @@ public class ValidateAutomatonInputAction extends Action {
                 .newStringInputReader()
                 .withDefaultValue(null)
                 .withMinLength(0)
-                .withPattern("^(0|1)+$")
+                .withPattern("^$|(0|1)+$")
                 .read("Veuillez entrer un input à valider par l'automate", "La chaine doit être composée de 0 et de 1 seulement");
-
-        if (StringUtils.isBlank(input)) {
-            this.getMenu().showError("Veuillez entrer un input valide");
-            return;
-        }
 
         Automaton automaton = this.getMenu().getAutomaton();
 
