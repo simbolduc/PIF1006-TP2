@@ -23,11 +23,13 @@ public class ValidateAutomatonInputAction extends Action {
 
         Automaton automaton = this.getMenu().getAutomaton();
 
+        // Ne pas affiché l'automate si celui-ci n'a jamais été chargé/défini
         if (!automaton.isAutomatonDefined()) {
             this.getMenu().showError("L'automate n'est pas complète. Veuillez configurer l'automate en premier lieu");
             return;
         }
 
+        // Valider l'input
         boolean valid = automaton.validate(input);
 
         if (valid) {

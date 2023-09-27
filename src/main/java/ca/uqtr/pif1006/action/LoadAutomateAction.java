@@ -60,6 +60,7 @@ public class LoadAutomateAction extends Action {
             for (String instruction : instructions) {
                 String[] args = instruction.split(" ");
 
+                // Séparer les arguments de l'instruction et valider qu'au moins un argument a été passé
                 String[] insArgs;
                 if (args.length > 1) {
                     insArgs = Arrays.copyOfRange(args, 1, args.length);
@@ -67,6 +68,7 @@ public class LoadAutomateAction extends Action {
                     throw new IllegalArgumentException("Veuillez spécifier des arguments à l'instruction entrée");
                 }
 
+                // Exécuter l'instruction
                 this.handleInstruction(args[0].trim().toUpperCase(), insArgs);
             }
         } catch (IOException e) {
@@ -80,6 +82,7 @@ public class LoadAutomateAction extends Action {
 
         if (type.equals("STATE")) {
             try {
+                // L'instruction STATE doit avoir deux paramètres : son nom et un indicateur si l'état est final ou non
                 if (args.length < 2) {
                     throw new IllegalArgumentException("L'instruction 'STATE' doit être suivi de deux arguments : <nom du state> <est final {0, 1}>");
                 }
@@ -87,6 +90,7 @@ public class LoadAutomateAction extends Action {
                 final String name = args[0];
                 final boolean isFinal = parseBool(args[1]);
 
+                // Création du State
                 State state = new State(name, isFinal);
                 this.states.add(state);
                 this.getMenu().getAutomaton().addState(state);
@@ -103,6 +107,7 @@ public class LoadAutomateAction extends Action {
 
         if (type.equals("TRANSITION")) {
             try {
+                // L'instruction TRANSITION doit avoir trois paramètres : le nom du state initial, la valeur input de la transition et le nom du state final
                 if (args.length < 3) {
                     throw new IllegalArgumentException("L'instruction 'TRANSITION' doit être suivi de trois arguments : <nom du state initial> <valeur {0, 1}> <nom du state final>");
                 }
@@ -111,28 +116,33 @@ public class LoadAutomateAction extends Action {
                 final String input = args[1];
                 final String finalName = args[2];
 
+                // Récupération de l'état initial
                 State initialState = this.states
                         .stream()
                         .filter(s -> s.getName().equalsIgnoreCase(initialName))
                         .findFirst()
                         .orElseThrow(() -> new IllegalArgumentException("L'état initiale {" + initialName + "} n'a pas été trouvée"));
 
+                // Récupération de l'état final
                 State finalState = this.states
                         .stream()
                         .filter(s -> s.getName().equalsIgnoreCase(finalName))
                         .findFirst()
                         .orElseThrow(() -> new IllegalArgumentException("L'état finale {" + finalName + "} n'a pas été trouvée"));
 
+                // Valider que la valeur de transition (input) est d'un seul caractère
                 if (input.length() > 1) {
                     throw new IllegalArgumentException("La valeur de transition doit être un caractère");
                 }
 
                 final char inputValue = input.charAt(0);
 
+                // Accepter seulement les valeurs 0 et 1 comme input
                 if (inputValue != '0' && inputValue != '1') {
                     throw new IllegalArgumentException("La valeur de transition doit être 0 ou 1");
                 }
 
+                // Créer la transition et l'associer à l'état
                 Transition transition = new Transition(inputValue, finalState);
                 initialState.addTransition(transition);
             } catch (IllegalArgumentException e) {
@@ -144,6 +154,11 @@ public class LoadAutomateAction extends Action {
         this.getMenu().showError("Impossible de trouver le type d'instruction : {" + type + "}");
     }
 
+    /**
+     * @param arg Valeur passée en argument dans l'automate (devrait être 0 ou 1)
+     * @return Valeur booléen : 0 = false, 1 = true
+     * @throws IllegalArgumentException Dans le cas où l'argument n'est pas un 0 ni un 1
+     */
     private boolean parseBool(String arg) throws IllegalArgumentException {
         if (arg.equals("1")) {
             return true;

@@ -39,11 +39,7 @@ public class Automaton {
         }
 
         // Valider si après avoir parcouru toutes les transitions, l'état est un état final
-        if (!this.currentState.isFinalState()) {
-            return false;
-        }
-
-        return true;
+        return this.currentState.isFinalState();
     }
 
     private void reset() {

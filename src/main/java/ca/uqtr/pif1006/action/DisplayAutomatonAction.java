@@ -29,11 +29,11 @@ public class DisplayAutomatonAction extends Action {
         for (int i = 0; i < states.size(); i++) {
             stateBuilder.append(states.get(i).getName());
             if (states.get(i).isFinalState()) {
-                stateBuilder.append("(F)");
+                stateBuilder.append("(F)"); // Si état final
             }
 
             if (i < states.size() - 1) {
-                stateBuilder.append(", ");
+                stateBuilder.append(", "); // Séparation entre états
             }
         }
 
@@ -56,7 +56,7 @@ public class DisplayAutomatonAction extends Action {
                 transitionBuilder.append(transition.getTo().getName()).append("(").append(transition.getInput()).append(")");
 
                 if (j < states.get(i).getTransitions().size() - 1) {
-                    transitionBuilder.append(", ");
+                    transitionBuilder.append(", "); // Séparation entre transitions
                 }
             }
 

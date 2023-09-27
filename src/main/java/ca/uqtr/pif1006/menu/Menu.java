@@ -41,10 +41,6 @@ public abstract class Menu {
         return this.textIO;
     }
 
-    public TextTerminal<?> getTerminal() {
-        return this.terminal;
-    }
-
     public Automaton getAutomaton() {
         return automaton;
     }
