@@ -7,12 +7,11 @@ public abstract class Menu {
 
     private final TextIO textIO;
     private final TextTerminal<?> terminal;
-    private final Automaton automaton;
+    private Automaton automaton;
 
-    public Menu(TextIO textIO, TextTerminal<?> terminal, Automaton automaton) {
+    public Menu(TextIO textIO, TextTerminal<?> terminal) {
         this.textIO = textIO;
         this.terminal = terminal;
-        this.automaton = automaton;
     }
 
     public abstract void show();
@@ -43,5 +42,9 @@ public abstract class Menu {
 
     public Automaton getAutomaton() {
         return automaton;
+    }
+
+    public void setAutomaton(Automaton automaton) {
+        this.automaton = automaton;
     }
 }

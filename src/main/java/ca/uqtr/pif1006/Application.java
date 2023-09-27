@@ -12,6 +12,6 @@ public class Application {
         TextIO textIO = TextIoFactory.getTextIO();
         TextTerminal<?> terminal = textIO.getTextTerminal();
 
-        new MainMenu(textIO, terminal, new Automaton()).show(); // Afficher le menu principal
+        new MainMenu(textIO, terminal).show(); // Afficher le menu principal
     }
 }

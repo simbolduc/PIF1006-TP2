@@ -125,7 +125,7 @@ fabric.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+*.jar!tp1-1.0-SNAPSHOT.jar
 *.war
 *.nar
 *.ear

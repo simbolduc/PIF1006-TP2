@@ -18,8 +18,8 @@ public class MainMenu extends Menu {
             "Option : "
     };
 
-    public MainMenu(TextIO textIO, TextTerminal<?> terminal, Automaton automaton) {
-        super(textIO, terminal, automaton);
+    public MainMenu(TextIO textIO, TextTerminal<?> terminal) {
+        super(textIO, terminal);
     }
 
     @Override

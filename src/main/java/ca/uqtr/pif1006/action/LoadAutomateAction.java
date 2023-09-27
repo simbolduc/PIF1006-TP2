@@ -1,6 +1,7 @@
 package ca.uqtr.pif1006.action;
 
 import ca.uqtr.pif1006.menu.Menu;
+import ca.uqtr.pif1006.struct.Automaton;
 import ca.uqtr.pif1006.struct.State;
 import ca.uqtr.pif1006.struct.Transition;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class LoadAutomateAction extends Action {
 
-    private List<State> states = new ArrayList<>();
+    private Automaton automaton;
 
     public LoadAutomateAction(Menu menu) {
         super(menu);
@@ -52,7 +53,7 @@ public class LoadAutomateAction extends Action {
         }
 
         // Réinitialisation de la mémoire de State
-        this.states = new ArrayList<>();
+        this.automaton = new Automaton();
 
         // Charger les instructions ligne par ligne
         try {
@@ -76,6 +77,8 @@ public class LoadAutomateAction extends Action {
         } catch (IllegalArgumentException e) {
             this.getMenu().showError(e.getMessage());
         }
+
+        this.getMenu().setAutomaton(this.automaton);
     }
 
     private void handleInstruction(String type, String... args) {
@@ -92,12 +95,11 @@ public class LoadAutomateAction extends Action {
 
                 // Création du State
                 State state = new State(name, isFinal);
-                this.states.add(state);
-                this.getMenu().getAutomaton().addState(state);
+                this.automaton.addState(state);
 
                 // Définir le State par défaut de l'automate
-                if (this.getMenu().getAutomaton().getCurrentState() == null) {
-                    this.getMenu().getAutomaton().setInitialState(state);
+                if (this.automaton.getCurrentState() == null) {
+                    this.automaton.setInitialState(state);
                 }
             } catch (IllegalArgumentException e) {
                 this.getMenu().showError(e.getMessage());
@@ -117,14 +119,14 @@ public class LoadAutomateAction extends Action {
                 final String finalName = args[2];
 
                 // Récupération de l'état initial
-                State initialState = this.states
+                State initialState = this.automaton.getStates()
                         .stream()
                         .filter(s -> s.getName().equalsIgnoreCase(initialName))
                         .findFirst()
                         .orElseThrow(() -> new IllegalArgumentException("L'état initiale {" + initialName + "} n'a pas été trouvée"));
 
                 // Récupération de l'état final
-                State finalState = this.states
+                State finalState = this.automaton.getStates()
                         .stream()
                         .filter(s -> s.getName().equalsIgnoreCase(finalName))
                         .findFirst()

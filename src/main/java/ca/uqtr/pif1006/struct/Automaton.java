@@ -54,14 +54,6 @@ public class Automaton {
         this.initialState = initialState;
     }
 
-    public State getInitialState() {
-        return this.initialState;
-    }
-
-    public boolean isAutomatonDefined() {
-        return this.initialState != null;
-    }
-
     public void addState(State state) {
         this.states.add(state);
     }

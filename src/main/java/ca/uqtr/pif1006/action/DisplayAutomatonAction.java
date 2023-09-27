@@ -17,7 +17,7 @@ public class DisplayAutomatonAction extends Action {
     public void execute() {
         final Automaton automaton = this.getMenu().getAutomaton();
 
-        if (!automaton.isAutomatonDefined()) {
+        if (automaton == null) {
             this.getMenu().showError("L'automate n'a pas été définie");
             return;
         }
