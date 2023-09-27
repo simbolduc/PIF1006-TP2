@@ -30,4 +30,5 @@ public class State {
     public List<Transition> getTransitions() {
         return this.transitions;
     }
+
 }

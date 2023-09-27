@@ -19,13 +19,21 @@ public abstract class Menu {
 
     public void showError(String msg) {
         this.terminal.println();
-        this.terminal.println("[ERREUR] " + msg);
+        this.terminal.executeWithPropertiesPrefix("error", t -> t.println("[ERREUR] " + msg));
         this.terminal.println();
     }
 
-    public void showMessage(String msg) {
+    public void showSuccess(String msg) {
         this.terminal.println();
-        this.terminal.println(" >>> " + msg);
+        this.terminal.executeWithPropertiesPrefix("success", t -> t.println("[SUCCÈS] " + msg));
+        this.terminal.println();
+    }
+
+    public void show(String msg) {
+        this.terminal.executeWithPropertiesPrefix("info", t -> t.println(msg));
+    }
+
+    public void eol() {
         this.terminal.println();
     }
 

@@ -2,7 +2,6 @@ package ca.uqtr.pif1006.action;
 
 import ca.uqtr.pif1006.menu.MainMenu;
 import ca.uqtr.pif1006.struct.Automaton;
-import org.apache.commons.lang3.StringUtils;
 import org.beryx.textio.TextIO;
 
 public class ValidateAutomatonInputAction extends Action {
@@ -32,7 +31,7 @@ public class ValidateAutomatonInputAction extends Action {
         boolean valid = automaton.validate(input);
 
         if (valid) {
-            this.getMenu().showMessage("La chaine {" + input + "} est bien valide.");
+            this.getMenu().showSuccess("La chaine {" + input + "} est bien valide.");
         } else {
             this.getMenu().showError("La chaine {" + input + "} est invalide.");
         }

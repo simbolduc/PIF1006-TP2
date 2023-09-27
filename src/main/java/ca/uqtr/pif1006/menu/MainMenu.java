@@ -14,7 +14,8 @@ public class MainMenu extends Menu {
             "1. Charger un automate par fichier",
             "2. Afficher l'automate",
             "3. Valider un input par l'automate",
-            "4. Quitter"
+            "4. Quitter",
+            "Option : "
     };
 
     public MainMenu(TextIO textIO, TextTerminal<?> terminal, Automaton automaton) {
@@ -39,7 +40,7 @@ public class MainMenu extends Menu {
                     break;
             }
 
-        } while (action != MENU.length);
+        } while (action != MENU.length - 1);
 
         System.exit(0);
     }

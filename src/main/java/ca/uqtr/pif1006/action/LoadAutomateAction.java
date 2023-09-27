@@ -89,6 +89,7 @@ public class LoadAutomateAction extends Action {
 
                 State state = new State(name, isFinal);
                 this.states.add(state);
+                this.getMenu().getAutomaton().addState(state);
 
                 // Définir le State par défaut de l'automate
                 if (this.getMenu().getAutomaton().getCurrentState() == null) {

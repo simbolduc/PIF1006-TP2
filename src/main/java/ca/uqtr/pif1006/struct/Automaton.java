@@ -1,9 +1,17 @@
 package ca.uqtr.pif1006.struct;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Automaton {
 
     private State initialState;
     private State currentState;
+    private final List<State> states;
+
+    public Automaton() {
+        this.states = new ArrayList<>();
+    }
 
     public boolean validate(final String input) {
         this.reset();
@@ -50,8 +58,20 @@ public class Automaton {
         this.initialState = initialState;
     }
 
+    public State getInitialState() {
+        return this.initialState;
+    }
+
     public boolean isAutomatonDefined() {
         return this.initialState != null;
+    }
+
+    public void addState(State state) {
+        this.states.add(state);
+    }
+
+    public List<State> getStates() {
+        return this.states;
     }
 
 }
