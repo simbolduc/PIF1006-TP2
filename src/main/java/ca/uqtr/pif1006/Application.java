@@ -1,7 +1,9 @@
+/*
+    Équipe : Simon Bolduc
+ */
 package ca.uqtr.pif1006;
 
 import ca.uqtr.pif1006.menu.MainMenu;
-import ca.uqtr.pif1006.struct.Automaton;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import org.beryx.textio.TextTerminal;
