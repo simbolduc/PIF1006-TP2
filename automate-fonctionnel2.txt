@@ -1,0 +1,15 @@
+state s0 1
+state s1 0
+state s2 0
+state s3 1
+state s4 0
+state s5 1
+transition s0 1 s1
+transition s1 1 s0
+transition s1 0 s2
+transition s2 1 s2
+transition s2 1 s3
+transition s3 0 s1
+transition s3 0 s4
+transition s4 0 s1
+transition s4 1 s5
