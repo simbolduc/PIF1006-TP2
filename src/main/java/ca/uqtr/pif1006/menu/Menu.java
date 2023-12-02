@@ -1,5 +1,5 @@
 package ca.uqtr.pif1006.menu;
-import ca.uqtr.pif1006.struct.Automaton;
+import ca.uqtr.pif1006.struct.MatrixSystem;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextTerminal;
 
@@ -7,7 +7,7 @@ public abstract class Menu {
 
     private final TextIO textIO;
     private final TextTerminal<?> terminal;
-    private Automaton automaton;
+    private MatrixSystem system;
 
     public Menu(TextIO textIO, TextTerminal<?> terminal) {
         this.textIO = textIO;
@@ -15,6 +15,10 @@ public abstract class Menu {
     }
 
     public abstract void show();
+
+    public TextTerminal<?> getTerminal() {
+        return this.terminal;
+    }
 
     public void showError(String msg) {
         this.terminal.println();
@@ -40,11 +44,11 @@ public abstract class Menu {
         return this.textIO;
     }
 
-    public Automaton getAutomaton() {
-        return automaton;
+    public MatrixSystem getSystem() {
+        return system;
     }
 
-    public void setAutomaton(Automaton automaton) {
-        this.automaton = automaton;
+    public void setSystem(MatrixSystem system) {
+        this.system = system;
     }
 }
