@@ -1,5 +1,6 @@
 package ca.uqtr.pif1006.struct;
 
+import ca.uqtr.pif1006.exception.DeterminantNullException;
 import ca.uqtr.pif1006.exception.MatrixNotInitializedException;
 import ca.uqtr.pif1006.exception.MatrixNotSquaredException;
 import org.beryx.textio.TextTerminal;
@@ -105,25 +106,49 @@ public class Matrix2D implements Serializable {
         return submatrix;
     }
 
-    public Matrix2D comatrix() throws MatrixNotInitializedException {
+    public Matrix2D comatrice() throws MatrixNotInitializedException {
         if (this.matrix == null || this.matrix.length == 0) {
             throw new MatrixNotInitializedException();
         }
 
-        return null;
-        // À compléter (1 pt)
-        // Doit retourner une matrice qui est la comatrice de celle de l'objet
+        int n = this.matrix.length;
+        double[][] matrix = new double[n][n];
+
+        for (int line = 0; line < this.matrix.length; line++) {
+            for (int col = 0; col < this.matrix[line].length; col++) {
+                matrix[col][line] = this.complementAlgebrique(this.matrix, line, col);
+            }
+        }
+
+        Matrix2D newMatrix = new Matrix2D();
+        newMatrix.setMatrix(matrix);
+        return newMatrix;
     }
 
-    public Matrix2D inverse() throws MatrixNotInitializedException {
+    public Matrix2D inverse() throws MatrixNotInitializedException, MatrixNotSquaredException, DeterminantNullException {
         if (this.matrix == null || this.matrix.length == 0) {
             throw new MatrixNotInitializedException();
         }
 
-        return null;
-        // À compléter (0.25 pt)
-        // Doit retourner une matrice qui est l'inverse de celle de l'objet;
-        // Si le déterminant est nul ou la matrice non carrée, on retourne null.
+        if (!this.isSquare()) {
+            throw new MatrixNotSquaredException();
+        }
+
+        double det = this.determinant();
+        if (det == 0) {
+            throw new DeterminantNullException();
+        }
+
+        Matrix2D com = this.comatrice();
+        int n = com.getMatrix().length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                com.getMatrix()[j][i] /= det;
+            }
+        }
+
+        return com;
     }
 
     public void print(TextTerminal<?> terminal) {
@@ -132,7 +157,7 @@ public class Matrix2D implements Serializable {
             terminal.print("|");
 
             for (int col = 0; col < this.matrix[line].length; col++) {
-                terminal.print(" " + this.matrix[line][col]);
+                terminal.print(" " + String.format("%.2f", this.matrix[line][col]));
             }
 
             terminal.println(" |");

@@ -1,7 +1,5 @@
 package ca.uqtr.pif1006.action;
 
-import ca.uqtr.pif1006.exception.MatrixNotInitializedException;
-import ca.uqtr.pif1006.exception.MatrixNotSquaredException;
 import ca.uqtr.pif1006.menu.Menu;
 import ca.uqtr.pif1006.struct.MatrixSystem;
 import com.google.gson.Gson;
@@ -64,12 +62,6 @@ public class LoadSystemAction extends Action {
 
         this.getMenu().getSystem().getA().print(this.getMenu().getTerminal());
         this.getMenu().getSystem().getB().print(this.getMenu().getTerminal());
-
-        try {
-            this.getMenu().showSuccess("Determinant of A is : " + this.getMenu().getSystem().getA().determinant());
-        } catch (MatrixNotInitializedException | MatrixNotSquaredException e) {
-            throw new RuntimeException(e);
-        }
 
         this.getMenu().showSuccess("Le système a bien été chargé!");
     }
