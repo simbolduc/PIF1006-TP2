@@ -8,7 +8,7 @@ import org.beryx.textio.TextTerminal;
 public class MainMenu extends Menu {
 
     private final static String[] MENU = {
-            "1. Charger un automate par fichier",
+            "1. Charger un système par fichier",
             "2. Afficher la matrice transposée",
             "3. Est carrée?",
             "4. Calculer le déterminant",
