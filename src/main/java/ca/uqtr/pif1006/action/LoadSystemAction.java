@@ -60,6 +60,16 @@ public class LoadSystemAction extends Action {
 
         this.getMenu().setSystem(gson.fromJson(reader, type));
 
+        if (this.getMenu().getSystem().getA().getMatrix() == null) {
+            this.getMenu().showError("La matrice A n'est pas valide.");
+            return;
+        }
+
+        if (this.getMenu().getSystem().getB().getMatrix() == null) {
+            this.getMenu().showError("La matrice B n'est pas valide.");
+            return;
+        }
+
         this.getMenu().getSystem().getA().print(this.getMenu().getTerminal());
         this.getMenu().getSystem().getB().print(this.getMenu().getTerminal());
 
